@@ -1,37 +1,5 @@
 #!/bin/bash
-
-sed -i "s#hostname='ImmortalWrt'#hostname='BakaWrt'#g" openwrt/package/base-files/files/bin/config_generate
-sed -i "s#timezone='UTC'#timezone='Asia/Shanghai'#g" openwrt/package/base-files/files/bin/config_generate
-sed -i "s#system.ntp.server='time1.apple.com'#system.ntp.server='ntp.aliyun.com'#g" openwrt/package/base-files/files/bin/config_generate
-sed -i "s#system.ntp.server='time1.google.com'#system.ntp.server='time1.cloud.tencent.com'#g" openwrt/package/base-files/files/bin/config_generate
-sed -i "s#system.ntp.server='time.cloudflare.com'#system.ntp.server='time.ustc.edu.cn'#g" openwrt/package/base-files/files/bin/config_generate
-
-cp -f files/banner openwrt/package/base-files/files/etc/
-cp files/distfeeds.conf.1 openwrt/package/system/opkg/files/
-cp -f files/20_migrate-feeds openwrt/package/system/opkg/files/
-
-echo '127.0.0.1 bakawrt bakawrt.local' >> openwrt/package/base-files/files/etc/hosts
-echo '::1     bakawrt bakawrt.local' >> openwrt/package/base-files/files/etc/hosts
-
-cd openwrt/package
-rm -rf feeds/luci/luci-theme-argon
-rm -rf feeds/luci/luci-app-argon-config
-
-mkdir custom-packages
-cd custom-packages
-git clone https://github.com/jerrykuku/luci-theme-argon
-git clone https://github.com/jerrykuku/luci-app-argon-config
-git clone https://github.com/sirpdboy/netspeedtest
-git clone https://github.com/Erope/openwrt_nezha
-git clone https://github.com/linkease/istore
-git clone https://github.com/linkease/nas-packages-luci
-git clone https://github.com/linkease/nas-packages
-git clone https://github.com/kenzok8/openwrt-packages kenzok8
-git clone https://github.com/sirpdboy/luci-app-poweroffdevice
-rm -rf kenzok8/luci-app-argon-config
-rm -rf kenzok8/luci-theme-argon
-
-cd ../..
+cd openwrt
 
 mkdir -p turboacc_tmp ./package/turboacc
 cd turboacc_tmp 
@@ -55,6 +23,36 @@ rm -rf turboacc_tmp
 echo "# CONFIG_NF_CONNTRACK_CHAIN_EVENTS is not set" >> target/linux/generic/config-6.1
 echo "# CONFIG_SHORTCUT_FE is not set" >> target/linux/generic/config-6.1
 
-
 ./scripts/feeds update -a
 ./scripts/feeds install -a
+
+sed -i "s#hostname='ImmortalWrt'#hostname='BakaWrt'#g" package/base-files/files/bin/config_generate
+sed -i "s#timezone='UTC'#timezone='Asia/Shanghai'#g" package/base-files/files/bin/config_generate
+sed -i "s#system.ntp.server='time1.apple.com'#system.ntp.server='ntp.aliyun.com'#g" package/base-files/files/bin/config_generate
+sed -i "s#system.ntp.server='time1.google.com'#system.ntp.server='time1.cloud.tencent.com'#g" package/base-files/files/bin/config_generate
+sed -i "s#system.ntp.server='time.cloudflare.com'#system.ntp.server='time.ustc.edu.cn'#g" package/base-files/files/bin/config_generate
+
+cp -f ../files/banner package/base-files/files/etc/
+cp ../files/distfeeds.conf.1 package/system/opkg/files/
+cp -f ../files/20_migrate-feeds package/system/opkg/files/
+
+echo '127.0.0.1 bakawrt bakawrt.local' >> package/base-files/files/etc/hosts
+echo '::1     bakawrt bakawrt.local' >> package/base-files/files/etc/hosts
+
+cd package
+rm -rf feeds/luci/luci-theme-argon
+rm -rf feeds/luci/luci-app-argon-config
+
+mkdir custom-packages
+cd custom-packages
+git clone https://github.com/jerrykuku/luci-theme-argon
+git clone https://github.com/jerrykuku/luci-app-argon-config
+git clone https://github.com/sirpdboy/netspeedtest
+git clone https://github.com/Erope/openwrt_nezha
+git clone https://github.com/linkease/istore
+git clone https://github.com/linkease/nas-packages-luci
+git clone https://github.com/linkease/nas-packages
+git clone https://github.com/kenzok8/openwrt-packages kenzok8
+git clone https://github.com/sirpdboy/luci-app-poweroffdevice
+rm -rf kenzok8/luci-app-argon-config
+rm -rf kenzok8/luci-theme-argon
