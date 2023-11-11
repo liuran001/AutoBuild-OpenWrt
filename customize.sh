@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 sed -i "s#hostname='ImmortalWrt'#hostname='BakaWrt'#g" openwrt/package/base-files/files/bin/config_generate
 sed -i "s#timezone='UTC'#timezone='Asia/Shanghai'#g" openwrt/package/base-files/files/bin/config_generate
 sed -i "s#system.ntp.server='time1.apple.com'#system.ntp.server='ntp.aliyun.com'#g" openwrt/package/base-files/files/bin/config_generate
