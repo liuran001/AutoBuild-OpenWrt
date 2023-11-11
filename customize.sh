@@ -57,4 +57,6 @@ git clone https://github.com/sirpdboy/luci-app-poweroffdevice
 rm -rf kenzok8/luci-app-argon-config
 rm -rf kenzok8/luci-theme-argon
 
+cd ../..
+make defconfig
 make tools/ccache/compile -j4 V=s
