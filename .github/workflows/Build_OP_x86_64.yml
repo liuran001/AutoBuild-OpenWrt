@@ -59,6 +59,11 @@ jobs:
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         chmod +x ./customize.sh && ./customize.sh
         cd openwrt && make defconfig
+
+    - name: ccache
+      uses: hendrikmuhs/ccache-action@v1.1
+      with:
+        key: ${{ matrix.os }}-${{ matrix.type }}
         
     - name: Download package
       working-directory: ./openwrt
