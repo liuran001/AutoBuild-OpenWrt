@@ -56,3 +56,5 @@ git clone https://github.com/kenzok8/openwrt-packages kenzok8
 git clone https://github.com/sirpdboy/luci-app-poweroffdevice
 rm -rf kenzok8/luci-app-argon-config
 rm -rf kenzok8/luci-theme-argon
+
+make tools/ccache/compile -j4 V=s
