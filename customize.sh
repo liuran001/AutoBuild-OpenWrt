@@ -17,6 +17,7 @@ cd openwrt/package
 rm -rf feeds/luci/luci-theme-argon
 rm -rf feeds/luci/luci-app-argon-config
 
+mkdir custom-packages
 cd custom-packages
 git clone https://github.com/jerrykuku/luci-theme-argon
 git clone https://github.com/jerrykuku/luci-app-argon-config
