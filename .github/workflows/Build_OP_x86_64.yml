@@ -75,8 +75,12 @@ jobs:
     - name: Build firmware
       working-directory: ./openwrt
       run: |
+        export PATH="/usr/lib/ccache:$PATH"
+        export CONFIG_CCACHE=y
+        ccache -s
         echo -e "$(nproc) thread build."
         make -j$(nproc) V=s
+        ccache -s
 
     - name : Upload artifact
       uses: actions/upload-artifact@master
